@@ -55,5 +55,4 @@ runs:
         export EXCLUDE_BRANCH_REGEX="${{ inputs.extra_protected_branch_regex }}"
         export EXCLUDE_TAG_REGEX="${{ inputs.extra_protected_tag_regex }}"
         export INPUT_EXCLUDE_OPEN_PR_BRANCHES="${{ inputs.exclude_open_pr_branches }}"
-
         ${{ github.action_path }}/delete-old-branches.sh
