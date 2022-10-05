@@ -44,7 +44,8 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: | 
+    - shell: bash
+      run: |
         export INPUT_REPO_TOKEN=${{ inputs.repo_token }}
         export INPUT_DATE=${{ inputs.date }}
         export INPUT_DRY_RUN=${{ inputs.dry_run }}
@@ -55,14 +56,4 @@ runs:
         export EXCLUDE_TAG_REGEX=${{ inputs.extra_protected_tag_regex }}
         export INPUT_EXCLUDE_OPEN_PR_BRANCHES=${{ inputs.exclude_open_pr_branches }}
 
-        ${{ github.action_path }}/delete-old-branches.sh \
-          "${{ inputs.repo_token }}" \
-          "${{ inputs.date }}" \
-          "${{ inputs.dry_run }}" \
-          "${{ inputs.delete_tags }}" \
-          "${{ inputs.minimum_tags }}" \
-          "${{ inputs.default_branches }}" \
-          "${{ inputs.extra_protected_branch_regex }}" \
-          "${{ inputs.extra_protected_tag_regex }}" \
-          "${{ inputs.exclude_open_pr_branches }}"
-      shell: bash
+        ${{ github.action_path }}/delete-old-branches.sh
