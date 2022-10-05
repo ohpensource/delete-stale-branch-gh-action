@@ -40,5 +40,17 @@ outputs:
   deleted_branches:
     description: "List of branches that were deleted"
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: "composite"
+  steps:
+    - run: |
+        ${{ github.action_path }}/delete-old-branches.sh \
+          "${{ inputs.repo_token }}" \
+          "${{ inputs.date }}" \
+          "${{ inputs.dry_run }}" \
+          "${{ inputs.delete_tags }}" \
+          "${{ inputs.minimum_tags }}" \
+          "${{ inputs.default_branches }}" \
+          "${{ inputs.extra_protected_branch_regex }}" \
+          "${{ inputs.extra_protected_tag_regex }}" \
+          "${{ inputs.exclude_open_pr_branches }}"
+      shell: bash
