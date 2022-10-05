@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-apt-get install ca-certificates curl git jq
+sudo apt-get install ca-certificates curl git jq
 
 [[ -n ${INPUT_REPO_TOKEN} ]] || { echo "Please set the REPO_TOKEN input"; exit 1; }
 [[ -n ${INPUT_DATE} ]] || { echo "Please specify a suitable date input for branch filtering"; exit 1; }
