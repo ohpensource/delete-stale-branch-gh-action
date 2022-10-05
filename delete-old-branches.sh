@@ -51,9 +51,9 @@ branch_protected() {
 extra_branch_or_tag_protected() {
     local br=${1} ref="${2}"
     if [[ "${ref}" == "branch" ]]; then
-        echo "${br}" | grep -Eiw "${EXCLUDE_BRANCH_REGEX}"
+        echo "${br}" | grep -qiE "${EXCLUDE_BRANCH_REGEX}"
     elif [[ "${ref}" == "tag" ]]; then
-        echo "${br}" | grep -Eiw "${EXCLUDE_TAG_REGEX}"
+        echo "${br}" | grep -qiE "${EXCLUDE_TAG_REGEX}"
     fi
 
     return $?
