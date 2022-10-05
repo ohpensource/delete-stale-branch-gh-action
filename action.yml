@@ -42,7 +42,8 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: |
+    - run: | 
+        export INPUT_REPO_TOKEN=${{ inputs.repo_token }};
         ${{ github.action_path }}/delete-old-branches.sh \
           "${{ inputs.repo_token }}" \
           "${{ inputs.date }}" \
