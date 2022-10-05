@@ -27,9 +27,11 @@ inputs:
   extra_protected_branch_regex:
     description: "grep extended (ERE) compatible regex for additional branches to exclude"
     required: false
+    default: '^$'
   extra_protected_tag_regex:
     description: "grep extended (ERE) compatible regex for additional tags to exclude"
     required: false
+    default: '^$'
   exclude_open_pr_branches:
     description: "Exclude branches that have an open pull request"
     required: false
@@ -43,15 +45,15 @@ runs:
   using: "composite"
   steps:
     - run: | 
-        export INPUT_REPO_TOKEN=${{ inputs.repo_token }};
-        export INPUT_DATE=${{ inputs.date }};
-        export INPUT_DRY_RUN=${{ inputs.dry_run }};
-        export INPUT_DELETE_TAGS=${{ inputs.delete_tags }};
-        export INPUT_MINIMUM_TAGS=${{ inputs.minimum_tags }};
-        export INPUT_DEFAULT_BRANCHES=${{ inputs.default_branches }};
-        export INPUT_EXTRA_PROTECTED_BRANCH_REGEX=${{ inputs.extra_protected_branch_regex }};
-        export INPUT_EXTRA_PROTECTED_TAG_REGEX=${{ inputs.extra_protected_tag_regex }};
-        export INPUT_EXCLUDE_OPEN_PR_BRANCHES=${{ inputs.exclude_open_pr_branches }};
+        export INPUT_REPO_TOKEN=${{ inputs.repo_token }}
+        export INPUT_DATE=${{ inputs.date }}
+        export INPUT_DRY_RUN=${{ inputs.dry_run }}
+        export INPUT_DELETE_TAGS=${{ inputs.delete_tags }}
+        export INPUT_MINIMUM_TAGS=${{ inputs.minimum_tags }}
+        export INPUT_DEFAULT_BRANCHES=${{ inputs.default_branches }}
+        export EXCLUDE_BRANCH_REGEX=${{ inputs.extra_protected_branch_regex }}
+        export EXCLUDE_TAG_REGEX=${{ inputs.extra_protected_tag_regex }}
+        export INPUT_EXCLUDE_OPEN_PR_BRANCHES=${{ inputs.exclude_open_pr_branches }}
 
         ${{ github.action_path }}/delete-old-branches.sh \
           "${{ inputs.repo_token }}" \
